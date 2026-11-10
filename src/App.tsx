@@ -1,4 +1,15 @@
 import { useEffect, useRef, useState } from "react"
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Menu,
+  Minus,
+  Play as PlayIcon,
+  Plus,
+  X,
+} from "lucide-react"
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6"
 
 const INSTAGRAM = "https://www.instagram.com/hodophile_xo"
 const FACEBOOK = "https://www.facebook.com/share/1dBysR2wjH/"
@@ -14,7 +25,7 @@ const films = [
     title: "Roads Less Taken",
     place: "Northern Pakistan",
     image:
-      "https://images.unsplash.com/photo-1536420100273-cabfa8e5b67a?auto=format&fit=crop&w=1200&q=88",
+      "https://images.pexels.com/photos/15916728/pexels-photo-15916728.jpeg?auto=compress&cs=tinysrgb&w=1200&q=85",
     paragraphs: [
       "A Northern Pakistan road trip is about more than reaching a destination. The route north from Islamabad winds through changing valleys, mountain rivers and small towns, turning the drive itself into one of the most memorable parts of travelling in Pakistan.",
       "Take time to explore the landscapes of Naran, Hunza and Skardu at a slower pace. Clear mornings reveal snow-covered peaks, while local markets and roadside tea stops offer a closer look at everyday life in the mountains.",
@@ -26,28 +37,28 @@ const films = [
   },
   {
     title: "Into the Quiet",
-    place: "Highlands",
+    place: "Garelt Valley",
     image:
-      "https://images.unsplash.com/photo-1708506825624-9f30964bb5cb?auto=format&fit=crop&w=1200&q=88",
+      "https://images.pexels.com/photos/35405084/pexels-photo-35405084.jpeg?auto=compress&cs=tinysrgb&w=1200&q=85",
     paragraphs: [
-      "A trip to Pakistan’s highlands offers a welcome change of pace from busy city life. In the Galiyat hills, pine-covered slopes, cool air and winding walking trails make it easy to slow down and enjoy the journey one view at a time.",
-      "Nathia Gali and nearby hill towns are popular starting points for exploring the region. Set out early for a peaceful walk, pause at a mountain viewpoint and leave time to enjoy local food instead of rushing between stops.",
-      "For a more comfortable highland escape, check the weather before travelling and bring layers for cool evenings. Weekends can be busy, so planning transport and accommodation ahead helps you spend more time outdoors and less time figuring out logistics.",
-      "Whether you are planning a short Galiyat getaway or a longer Pakistan mountain holiday, the quiet moments often become the highlights. A forest trail after rain, clouds moving across the hills and a slow cup of tea can make a simple weekend feel unforgettable.",
+      "A trip through Gilgit-Baltistan’s highlands offers a welcome change of pace from busy city life. In Garelt Valley, green slopes, cool air and mountain views make it easy to slow down and enjoy the journey one moment at a time.",
+      "Take time to explore the valley at an unhurried pace. Set out early for a peaceful walk, pause at a viewpoint and leave room to enjoy local food instead of rushing between stops.",
+      "For a more comfortable mountain escape, check the weather before travelling and bring layers for cool evenings. Planning transport and accommodation ahead helps you spend more time outdoors and less time figuring out logistics.",
+      "The quiet moments often become the highlights: clouds moving across the hills, a walk through the valley and a slow cup of tea at sunset can make a simple trip feel unforgettable.",
     ],
     number: "02",
     className: "",
   },
   {
     title: "Chasing Horizons",
-    place: "Desert Roads",
+    place: "Hunza Valley",
     image:
-      "https://images.unsplash.com/photo-1698760414295-1de7be95748c?auto=format&fit=crop&w=1200&q=88",
+      "https://images.pexels.com/photos/35061891/pexels-photo-35061891.jpeg?auto=compress&cs=tinysrgb&w=1200&q=85",
     paragraphs: [
-      "A Pakistan desert road trip brings a different kind of beauty into view: wide-open skies, warm colours and long, quiet stretches of road. In the Cholistan and Thar regions, the landscape changes with the light, making even a short drive feel cinematic.",
-      "Plan your route around the cooler hours of the day and give yourself time to visit historic sites, local villages and the desert beyond the main road. Respecting local customs and asking before photographing people helps make every stop more welcoming.",
-      "Desert travel rewards good preparation. Carry drinking water, sun protection and a charged phone, and confirm fuel and transport plans before setting out. If you are unfamiliar with the area, a knowledgeable local guide can help you travel safely and find meaningful places to visit.",
-      "The most memorable desert journeys are not measured by distance. They come from watching the sunset settle over the dunes, sharing stories along the way and finding a fresh perspective in the open landscape. That is the feeling behind chasing horizons in Pakistan.",
+      "A road trip through Hunza is about more than reaching a destination. The route winds through mountain valleys, past rivers and small towns, making the drive itself one of the most memorable parts of travelling in northern Pakistan.",
+      "Take time to explore Karimabad and the surrounding valleys. Pause at a mountain viewpoint, enjoy local food and leave room for the unexpected instead of rushing between stops.",
+      "Mountain travel rewards good preparation. Check seasonal road conditions, allow extra time between stops and pack for changing weather. A local guide can help you discover scenic viewpoints and plan a comfortable route.",
+      "The best journeys leave room for unplanned moments: a quiet walk beside the river, a conversation with a local host or one last look at the mountains before sunset. That is the feeling behind chasing horizons in Hunza.",
     ],
     number: "03",
     className: "",
@@ -159,42 +170,22 @@ const packages = [
 ]
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d={diagonal ? "M7 17 17 7M8 7h9v9" : "M5 12h14M14 7l5 5-5 5"} />
-    </svg>
-  )
+  const Icon = diagonal ? ArrowUpRight : ArrowRight
+  return <Icon aria-hidden="true" />
 }
 
 function Play() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m9 7 8 5-8 5V7Z" />
-    </svg>
-  )
+  return <PlayIcon aria-hidden="true" fill="currentColor" />
 }
 
 function SocialIcon({ platform }: { platform: "instagram" | "facebook" | "whatsapp" }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      {platform === "instagram" && (
-        <>
-          <rect x="3" y="3" width="18" height="18" rx="5" />
-          <circle cx="12" cy="12" r="4" />
-          <circle cx="17.5" cy="6.5" r=".8" className="fill" />
-        </>
-      )}
-      {platform === "facebook" && (
-        <path className="facebook-glyph" d="M14.2 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H8v3.1h2.8v8h3.4Z" />
-      )}
-      {platform === "whatsapp" && (
-        <>
-          <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z" />
-          <path d="M8.2 7.8c.3-.6.6-.6.9-.6h.5c.2 0 .4.1.5.4l.8 1.9c.1.2.1.4 0 .6l-.6.8c-.2.2-.2.4 0 .6.5.8 1.2 1.5 2 2 .2.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .3-.2 1.2-.8 1.7-.5.5-1.2.7-1.8.6-.6-.1-1.4-.3-2.4-.8a9.1 9.1 0 0 1-3.8-3.4c-.5-.8-.8-1.7-.8-2.4 0-.8.4-1.3.8-1.5Z" />
-        </>
-      )}
-    </svg>
-  )
+  const icons = {
+    instagram: FaInstagram,
+    facebook: FaFacebookF,
+    whatsapp: FaWhatsapp,
+  }
+  const Icon = icons[platform]
+  return <Icon aria-hidden="true" />
 }
 
 function useReveal() {
@@ -310,40 +301,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const section = document.getElementById("packages")
-    if (!section) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return
-        packages.forEach(({ image }) => {
-          const preload = new Image()
-          preload.src = image
-        })
-        observer.disconnect()
-      },
-      { rootMargin: "800px 0px" },
-    )
-    observer.observe(section)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const section = document.getElementById("journal")
-    if (!section) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return
-        section.querySelectorAll("iframe").forEach((frame) => {
-          frame.loading = "eager"
-        })
-        observer.disconnect()
-      },
-      { rootMargin: "1200px 0px" },
-    )
-    observer.observe(section)
-    return () => observer.disconnect()
+    packages.forEach(({ image }) => {
+      const preload = new Image()
+      preload.src = image
+    })
   }, [])
 
   return (
@@ -374,7 +335,7 @@ function App() {
           HODOPHILE <span>XO</span>
         </a>
         <div className="nav-links">
-          <a href="#films">Films</a>
+          <a href="#films">Journal</a>
           <a href="#story">Story</a>
           <a href="#packages">Packages</a>
           <a href="#journal">Reels</a>
@@ -391,17 +352,17 @@ function App() {
           </a>
         </div>
         <button
-          className={`menu-button ${menuOpen ? "open" : ""}`}
+          className="menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
-          <i />
-          <i />
+          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        {["Films", "Story", "Packages"].map((link) => (
+        {["Journal", "Story", "Packages"].map((link) => (
           <a
             key={link}
             href={`#${link.toLowerCase()}`}
@@ -432,6 +393,8 @@ function App() {
           src={HERO_POSTER}
           alt="Mountain road landscape"
           aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
         />
         <video
           className="hero-video"
@@ -441,7 +404,7 @@ function App() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
         />
         <div className="hero-wash" />
@@ -452,7 +415,7 @@ function App() {
         </div>
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">
-            <span /> TRAVEL FILMS & VISUAL STORIES
+            <span /> TRAVEL JOURNALS & VISUAL STORIES
           </p>
           <h1>
             Go where you
@@ -465,7 +428,7 @@ function App() {
           </p>
           <div className="hero-actions">
             <a href="#films" className="button button-light">
-              Explore films <Arrow />
+              Explore journal <Arrow />
             </a>
             <button
               className="text-button"
@@ -493,7 +456,7 @@ function App() {
               <span /> SELECTED STORIES
             </p>
             <h2>
-              Films from the <em>road.</em>
+              Journal from the <em>road.</em>
             </h2>
           </div>
           <p className="heading-note">
@@ -513,7 +476,8 @@ function App() {
                 <img
                   className="scroll-drift"
                   src={film.image}
-                  alt={`${film.place} travel film`}
+                  alt={`${film.place} travel journal`}
+                  loading="eager"
                 />
                 <span className="film-shade" />
                 <span className="film-number">{film.number}</span>
@@ -534,8 +498,9 @@ function App() {
         <div className="story-photo">
           <img
             className="scroll-drift"
-            src="https://images.unsplash.com/photo-1723277252923-411187172dd1?auto=format&fit=crop&w=1400&q=88"
-            alt="Traveller riding through a mountain landscape"
+            src="https://images.pexels.com/photos/31839245/pexels-photo-31839245.jpeg?auto=compress&cs=tinysrgb&w=1400"
+            alt="Travelers crossing a suspension bridge over a mountain lake in Pakistan"
+            loading="eager"
           />
           <span className="photo-stamp">
             34°N
@@ -554,7 +519,7 @@ function App() {
             Hodophile <i>(n.)</i> — one who loves to travel.
           </p>
           <p>
-            I make films about the feeling of being somewhere new. The quiet
+            I make visual journals about the feeling of being somewhere new. The quiet
             before sunrise, roads that have no names, and the people you meet in
             between.
           </p>
@@ -650,7 +615,7 @@ function App() {
               <img
                 src={chosenPackage.image}
                 alt={chosenPackage.name}
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
               <div className="package-visual-shade" />
@@ -686,7 +651,9 @@ function App() {
                 <div className="included-list">
                   {chosenPackage.includes.map((item) => (
                     <span key={item}>
-                      <i>✓</i>
+                      <i>
+                        <Check aria-hidden="true" />
+                      </i>
                       {item}
                     </span>
                   ))}
@@ -703,7 +670,7 @@ function App() {
                       }
                       aria-label="Remove traveller"
                     >
-                      −
+                      <Minus aria-hidden="true" />
                     </button>
                     <strong>{guests.toString().padStart(2, "0")}</strong>
                     <button
@@ -712,7 +679,7 @@ function App() {
                       }
                       aria-label="Add traveller"
                     >
-                      +
+                      <Plus aria-hidden="true" />
                     </button>
                   </div>
                 </div>
@@ -776,7 +743,7 @@ function App() {
                   <iframe
                     src={`https://www.instagram.com/reel/${reel.code}/embed/`}
                     title={`Hodophile Instagram reel ${index + 1}`}
-                    loading="lazy"
+                    loading="eager"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     allowFullScreen
                   />
@@ -804,7 +771,7 @@ function App() {
             Let’s get <em>lost.</em>
           </h2>
           <p>
-            Follow the journey for new travel films,
+            Follow the journey for new travel journals,
             <br />
             stories, and places worth wandering.
           </p>
@@ -823,7 +790,7 @@ function App() {
         <a className="brand footer-brand" href="#top">
           HODOPHILE <span>XO</span>
         </a>
-        <p>TRAVEL FILMS · VISUAL STORIES</p>
+        <p>TRAVEL JOURNALS · VISUAL STORIES</p>
         <div>
           <span>© 2026 HODOPHILE XO</span>
           <nav className="social-links footer-socials" aria-label="Social media">
@@ -851,6 +818,7 @@ function App() {
             <img
               src={activeFilm.image}
               alt={`${activeFilm.place} landscape`}
+              loading="eager"
             />
             <div className="film-backdrop-wash" />
           </div>

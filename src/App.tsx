@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 
 const INSTAGRAM = "https://www.instagram.com/hodophile_xo"
+const FACEBOOK = "https://www.facebook.com/share/1dBysR2wjH/"
+const WHATSAPP = "https://wa.me/message/IJS2GDYAGWAQI1"
 const BOOKING_NUMBER = "923017512670"
+const HERO_VIDEO =
+  "https://videos.pexels.com/video-files/13126809/13126809-hd_1920_1080_30fps.mp4"
 const HERO_POSTER =
-  "https://images.unsplash.com/photo-1749780185950-cb25f8b88f2d?auto=format&fit=crop&w=2200&q=90"
+  "https://images.pexels.com/videos/13126809/bern-dji-djimini-djimini2-13126809.jpeg?auto=compress&w=1920"
 
 const films = [
   {
@@ -170,12 +174,25 @@ function Play() {
   )
 }
 
-function Instagram() {
+function SocialIcon({ platform }: { platform: "instagram" | "facebook" | "whatsapp" }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r=".8" className="fill" />
+      {platform === "instagram" && (
+        <>
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r=".8" className="fill" />
+        </>
+      )}
+      {platform === "facebook" && (
+        <path className="facebook-glyph" d="M14.2 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H8v3.1h2.8v8h3.4Z" />
+      )}
+      {platform === "whatsapp" && (
+        <>
+          <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z" />
+          <path d="M8.2 7.8c.3-.6.6-.6.9-.6h.5c.2 0 .4.1.5.4l.8 1.9c.1.2.1.4 0 .6l-.6.8c-.2.2-.2.4 0 .6.5.8 1.2 1.5 2 2 .2.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .3-.2 1.2-.8 1.7-.5.5-1.2.7-1.8.6-.6-.1-1.4-.3-2.4-.8a9.1 9.1 0 0 1-3.8-3.4c-.5-.8-.8-1.7-.8-2.4 0-.8.4-1.3.8-1.5Z" />
+        </>
+      )}
     </svg>
   )
 }
@@ -362,14 +379,17 @@ function App() {
           <a href="#packages">Packages</a>
           <a href="#journal">Reels</a>
         </div>
-        <a
-          className="nav-social"
-          href={INSTAGRAM}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Instagram <Arrow diagonal />
-        </a>
+        <div className="social-links nav-socials" aria-label="Social media">
+          <a className="social-icon-link" href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
+            <SocialIcon platform="instagram" />
+          </a>
+          <a className="social-icon-link" href={FACEBOOK} target="_blank" rel="noreferrer" aria-label="Facebook">
+            <SocialIcon platform="facebook" />
+          </a>
+          <a className="social-icon-link" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <SocialIcon platform="whatsapp" />
+          </a>
+        </div>
         <button
           className={`menu-button ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -393,23 +413,42 @@ function App() {
         <a href="#journal" onClick={() => setMenuOpen(false)}>
           Reels
         </a>
-        <a href={INSTAGRAM} target="_blank" rel="noreferrer">
-          Instagram <Arrow diagonal />
-        </a>
+        <div className="social-links mobile-socials" aria-label="Social media">
+          <a className="social-icon-link" href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
+            <SocialIcon platform="instagram" />
+          </a>
+          <a className="social-icon-link" href={FACEBOOK} target="_blank" rel="noreferrer" aria-label="Facebook">
+            <SocialIcon platform="facebook" />
+          </a>
+          <a className="social-icon-link" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <SocialIcon platform="whatsapp" />
+          </a>
+        </div>
       </div>
 
       <header id="top" className="hero">
         <img
-          className="hero-video"
+          className="hero-video hero-poster"
           src={HERO_POSTER}
           alt="Mountain road landscape"
+          aria-hidden="true"
+        />
+        <video
+          className="hero-video"
+          src={HERO_VIDEO}
+          poster={HERO_POSTER}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
           aria-hidden="true"
         />
         <div className="hero-wash" />
         <div className="grain" />
         <div className="video-status">
           <span />
-          CINEMATIC JOURNAL · PHOTO
+          CINEMATIC JOURNAL · VIDEO
         </div>
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">
@@ -775,7 +814,7 @@ function App() {
             rel="noreferrer"
             className="button button-dark"
           >
-            <Instagram /> Follow @hodophile_xo <Arrow diagonal />
+            <SocialIcon platform="instagram" /> Follow @hodophile_xo <Arrow diagonal />
           </a>
         </Reveal>
       </section>
@@ -787,9 +826,17 @@ function App() {
         <p>TRAVEL FILMS · VISUAL STORIES</p>
         <div>
           <span>© 2026 HODOPHILE XO</span>
-          <a href={INSTAGRAM} target="_blank" rel="noreferrer">
-            INSTAGRAM
-          </a>
+          <nav className="social-links footer-socials" aria-label="Social media">
+            <a className="social-icon-link" href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
+              <SocialIcon platform="instagram" />
+            </a>
+            <a className="social-icon-link" href={FACEBOOK} target="_blank" rel="noreferrer" aria-label="Facebook">
+              <SocialIcon platform="facebook" />
+            </a>
+            <a className="social-icon-link" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <SocialIcon platform="whatsapp" />
+            </a>
+          </nav>
         </div>
       </footer>
 

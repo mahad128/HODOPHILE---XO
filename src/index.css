@@ -59,14 +59,24 @@ button { font: inherit; }
 .brand span { color: var(--orange); }
 .nav-links { display: flex; gap: 2.8rem; }
 .nav a { text-decoration: none; }
-.nav-links a, .nav-social { font-size: .67rem; letter-spacing: .18em; text-transform: uppercase; }
+.nav-links a { font-size: .67rem; letter-spacing: .18em; text-transform: uppercase; }
 .nav-links a { position: relative; }
 .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -6px; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .3s; }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-.nav-social { justify-self: end; display: flex; align-items: center; gap: .5rem; }
+.social-links { display: flex; align-items: center; gap: .65rem; }
+.nav-socials { justify-self: end; }
+.social-icon-link { width: 32px; height: 36px; display: grid; place-items: center; margin: 0; padding: 0; text-decoration: none; }
+.social-icon-link[aria-label="Instagram"] { color: #e4405f; }
+.social-icon-link[aria-label="Facebook"] { color: #1877f2; }
+.social-icon-link[aria-label="WhatsApp"] { color: #25d366; }
+.social-icon-link svg { width: 21px; height: 21px; transition: transform .35s cubic-bezier(.16,1,.3,1), filter .35s ease; }
+.social-icon-link .facebook-glyph { fill: currentColor; stroke: none; }
+.social-icon-link:hover svg, .social-icon-link:focus-visible svg { animation: socialIconLift .65s cubic-bezier(.16,1,.3,1); }
+.social-icon-link[aria-label="Instagram"]:hover svg, .social-icon-link[aria-label="Instagram"]:focus-visible svg { filter: drop-shadow(0 3px 7px rgba(228,64,95,.45)) drop-shadow(0 0 10px rgba(49,182,228,.3)); }
+.social-icon-link[aria-label="Facebook"]:hover svg, .social-icon-link[aria-label="Facebook"]:focus-visible svg { filter: drop-shadow(0 3px 8px rgba(24,119,242,.5)) drop-shadow(0 0 9px rgba(49,182,228,.3)); }
+.social-icon-link[aria-label="WhatsApp"]:hover svg, .social-icon-link[aria-label="WhatsApp"]:focus-visible svg { filter: drop-shadow(0 3px 8px rgba(37,211,102,.45)) drop-shadow(0 0 9px rgba(49,182,228,.3)); }
+@keyframes socialIconLift { 35% { transform: translateY(-5px) rotate(-9deg) scale(1.2); } 70% { transform: translateY(1px) rotate(4deg) scale(.97); } }
 svg { width: 1.1em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.nav-social svg { transition: transform .25s; }
-.nav-social:hover svg { transform: translate(3px,-3px); }
 .menu-button { display: none; background: none; border: 0; width: 30px; padding: 8px 0; }
 .menu-button i { display: block; height: 1px; margin: 5px 0; background: currentColor; transition: .3s; }
 .mobile-menu { display: none; }
@@ -304,6 +314,7 @@ footer { min-height: 260px; padding: 4rem 8.3vw 2rem; background: var(--ink); co
 .footer-brand { font-family: 'Italiana', serif; font-size: 2.1rem; letter-spacing: .08em; }
 footer > p { font-size: .52rem; letter-spacing: .25em; opacity: .5; align-self: center; }
 footer > div { grid-column: 1 / -1; align-self: end; border-top: 1px solid rgba(255,255,255,.15); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: .52rem; letter-spacing: .2em; opacity: .65; }
+.footer-socials { gap: .8rem; }
 footer a { text-decoration: none; }
 
 .film-modal { position: fixed; inset: 0; z-index: 100; overflow-y: auto; background: #02090d; color: white; animation: modalIn .55s ease both; scrollbar-color: var(--orange) rgba(255,255,255,.12); scrollbar-width: thin; }
@@ -346,17 +357,22 @@ footer a { text-decoration: none; }
   .film-blog { padding-top: 4rem; }
   .modal-close { top: 1.5rem; right: 2rem; }
   .nav { grid-template-columns: 1fr auto; padding: 0 1.4rem; height: 68px; }
+  .nav .brand { min-width: 0; white-space: nowrap; font-size: .75rem; letter-spacing: .08em; }
   .cinema-hud { inset: 10px; }
   .cinema-cursor { display: none; }
   .hud-format { display: none; }
-  .nav-links, .nav-social { display: none; }
+  .nav-links { display: none; }
+  .nav-socials { display: none; }
   .menu-button { display: block; z-index: 3; }
   .menu-button.open i:first-child { transform: translateY(3px) rotate(45deg); }
   .menu-button.open i:last-child { transform: translateY(-3px) rotate(-45deg); }
   .mobile-menu { position: fixed; z-index: 40; inset: 0; background: var(--ink); color: var(--cream); padding: 8rem 1.5rem 3rem; flex-direction: column; justify-content: center; display: flex; opacity: 0; pointer-events: none; transition: .4s; }
   .mobile-menu.open { opacity: 1; pointer-events: auto; }
   .mobile-menu a { font-family: 'Italiana', serif; font-size: 3.5rem; text-decoration: none; margin: .35rem 0; display: flex; align-items: center; gap: .5rem; }
-  .mobile-menu a:last-child { font-family: 'DM Sans', sans-serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; margin-top: 2.5rem; color: var(--orange); }
+  .mobile-socials { display: flex; gap: .9rem; margin-top: 1.5rem; }
+  .mobile-menu .mobile-socials .social-icon-link { width: 40px; height: 40px; margin: 0; font-size: 1rem; }
+  .reveal { transform: translateY(38px) scale(.99); filter: blur(2px); transition-duration: .7s, .75s, .55s; }
+  .reveal.is-visible { transform: none; filter: none; }
   .hero-copy { left: 1.5rem; width: calc(100% - 3rem); }
   .video-status { right: 1.5rem; bottom: 1.4rem; }
   h1 { font-size: clamp(4.2rem, 19vw, 7rem); }
@@ -374,11 +390,15 @@ footer a { text-decoration: none; }
   .story-copy { padding: 0 1.5rem; }
   .packages-heading { align-items: start; }
   .package-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .package-list { display: grid; grid-template-columns: 1fr 1fr; }
+  .package-list { display: block; }
   .package-tab { padding: 1.2rem .7rem; grid-template-columns: 24px 1fr; }
-  .package-tab:nth-child(odd) { border-right: 1px solid var(--line); }
+  .package-tab:nth-child(odd) { border-right: 0; }
   .package-tab-duration { display: none; }
-  .package-stage { min-height: 0; transform: none; transform-style: flat; transition: none; }
+  .package-stage { min-height: 0; transform-style: flat; transition: box-shadow .3s ease; }
+  .package-stage { grid-template-columns: 1fr; }
+  .package-visual { min-height: 530px; }
+  .booking-panel { min-height: 0; }
+  .booking-calculator { margin-top: 1.2rem; }
   .package-stage:hover { box-shadow: 0 35px 80px rgba(0,62,88,.14); }
   .package-cursor-glow { display: none; }
   .moment-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1rem; }
@@ -411,11 +431,7 @@ footer a { text-decoration: none; }
   .film-info strong { display: block; margin-top: .35rem; }
   .play-button { width: 56px; height: 56px; margin: -28px; }
   .story-photo { min-height: 500px; }
-  .package-list { display: block; }
-  .package-tab:nth-child(odd) { border-right: 0; }
-  .package-stage { grid-template-columns: 1fr; }
-  .package-visual { min-height: 530px; }
-  .booking-panel { min-height: 650px; padding: 2rem 1.25rem 1.4rem; }
+  .booking-panel { min-height: 0; padding: 2rem 1.25rem 1.4rem; }
   .booking-price { font-size: 3.5rem; }
   .moment h3 { font-size: 1.15rem; }
   .reel-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -429,50 +445,74 @@ footer a { text-decoration: none; }
 
 @media (max-width: 900px) {
   @supports (animation-timeline: view()) {
-    .packages .package-tab {
-      animation: mobileTabIn linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 26%;
+    .cinema-scene {
+      animation-name: mobileSceneCamera;
+      animation-range: entry 0% cover 24%;
     }
-    .packages .package-stage {
-      animation: mobilePackageIn linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 38%;
-    }
-    .packages .package-visual-copy {
-      animation: mobileCopyRise linear both;
-      animation-timeline: view();
-      animation-range: entry 15% cover 48%;
-    }
-    .packages .package-detail-block,
-    .packages .booking-calculator,
-    .packages .booking-button,
-    .packages .booking-help {
-      animation: mobileDetailIn linear both;
-      animation-timeline: view();
+    .cinema-scene::after {
+      animation-name: mobileSceneLightSweep;
       animation-range: entry 0% cover 28%;
+    }
+    .scroll-scene .section-heading h2,
+    .scroll-scene .journal-top h2,
+    .scroll-scene .packages-heading h2,
+    .scroll-scene .story-copy h2 {
+      animation-name: mobileTitleGlide;
+      animation-range: entry 5% cover 32%;
+    }
+    .scroll-drift {
+      animation-name: mobileMediaDrift;
+    }
+    .story-photo {
+      animation-name: mobilePhotoReveal;
+      animation-range: entry 0% cover 32%;
+    }
+    .cta .reveal {
+      animation-name: mobileCtaFloat;
     }
   }
 }
-@keyframes mobileTabIn {
-  from { opacity: .15; transform: translateX(-36px); }
-  to { opacity: 1; transform: translateX(0); }
+@keyframes mobileSceneCamera {
+  from { opacity: .6; transform: translateY(38px) scale(.98); clip-path: inset(2% 0 0); }
+  to { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0); }
 }
-@keyframes mobilePackageIn {
-  from { opacity: .2; transform: translateY(90px) scale(.9) rotateX(7deg); }
-  to { opacity: 1; transform: translateY(0) scale(1) rotateX(0); }
+@keyframes mobileSceneLightSweep {
+  0% { opacity: 0; transform: translateX(-20%); }
+  45% { opacity: .35; }
+  100% { opacity: 0; transform: translateX(20%); }
 }
-@keyframes mobileCopyRise {
-  from { opacity: .1; transform: translateY(65px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes mobileTitleGlide {
+  from { transform: translateX(-4vw); opacity: .35; letter-spacing: -.045em; }
+  to { transform: translateX(0); opacity: 1; letter-spacing: -.025em; }
 }
-@keyframes mobileDetailIn {
-  from { opacity: .1; transform: translateY(38px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes mobileMediaDrift {
+  from { transform: scale(1.06) translateY(-2.5%); }
+  to { transform: scale(1.06) translateY(2.5%); }
+}
+@keyframes mobilePhotoReveal {
+  from { clip-path: inset(8% 3% 8%); transform: translateY(38px); }
+  to { clip-path: inset(0); transform: translateY(0); }
+}
+@keyframes mobileCtaFloat {
+  from { transform: translateY(42px) scale(.97); opacity: .35; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+@media (max-width: 900px) and (hover: none) {
+  .film-card img, .moment img { transition-duration: .45s; }
+  .film-card:active img, .film-card:focus-visible img,
+  .moment:active img, .moment:focus-visible img { transform: scale(1.05); filter: saturate(1.08) brightness(.88); }
+  .film-card:active .film-shade, .film-card:focus-visible .film-shade { background-color: rgba(0,11,17,.08); }
+  .film-card .play-button { width: 54px; height: 54px; margin: -27px; background: rgba(3,8,11,.3); }
+  .moment-play { opacity: 1; transform: none; }
+  .instagram-reel:active { transform: translateY(-4px); border-color: rgba(49,182,228,.7); background: rgba(49,182,228,.08); }
+  .text-button:active .mini-play, .guest-control button:active, .booking-button:active, .button:active {
+    transform: scale(.97);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  .hero-video:not(.hero-poster) { display: none; }
   .reveal { opacity: 1; transform: none; }
   .package-stage { transform: none; transition: none; }
   .cinematic-intro { display: none; }

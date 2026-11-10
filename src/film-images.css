@@ -1,0 +1,47 @@
+/* Replace the film-card artwork with northern Pakistan mountain photography. */
+#films .film-card {
+  isolation: isolate;
+}
+
+#films .film-card > img {
+  display: none;
+}
+
+#films .film-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1.2s cubic-bezier(.16, 1, .3, 1), filter .5s;
+}
+
+#films .film-1 .film-card::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/98/Hunza_valley%2C_Karakoram_Highway%2C_Pakistan.jpg");
+  background-position: center 54%;
+}
+
+#films .film-2 .film-card::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/1/13/Skardu_Valley_view.jpg");
+}
+
+#films .film-3 .film-card::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/8a/Fairy_Meadows_and_the_view_of_Nanga_Parbat.jpg");
+}
+
+#films .film-card:hover::before,
+#films .film-card:active::before,
+#films .film-card:focus-visible::before {
+  transform: scale(1.07);
+  filter: saturate(1.08);
+}
+
+#films .film-card > .film-shade { z-index: 1; }
+#films .film-card > .film-number,
+#films .film-card > .play-button,
+#films .film-card > .film-info { z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  #films .film-card::before { transition: none; }
+}
